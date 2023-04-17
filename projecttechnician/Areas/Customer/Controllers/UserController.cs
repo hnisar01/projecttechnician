@@ -33,6 +33,7 @@ namespace projecttechnician.Areas.Customer.Controllers
                 var result = await _userManager.CreateAsync(user, user.PasswordHash);
                 if (result.Succeeded)
                 {
+                    var isSaveRole = await _userManager.AddToRoleAsync(user, "User");
                     TempData["Save"] = "User has been created";
                     return RedirectToAction(nameof(Index));
                 }
